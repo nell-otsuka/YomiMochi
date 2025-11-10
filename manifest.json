@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+  "name": "YomiMochi",
+  "version": "1.0.0",
+  "description": "Automatically translate Japanese text to English",
+  "author": "Nell Otsuka",
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "<all_urls>",
+    "https://api-free.deepl.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}
