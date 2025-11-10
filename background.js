@@ -8,8 +8,9 @@ const DEEPL_API_URL_FREE = 'https://api-free.deepl.com/v2/translate';
 const DEEPL_API_URL_PAID = 'https://api.deepl.com/v2/translate';
 const GOOGLE_TRANSLATE_URL = 'https://translate.googleapis.com/translate_a/single';
 
-// Translation cache
+// Translation cache (cleared every 30 minutes to prevent unbounded growth)
 const cache = new Map();
+setInterval(() => cache.clear(), 30 * 60 * 1000);
 
 // Promise to ensure API key is loaded
 const apiKeyPromise = new Promise((resolve) => {

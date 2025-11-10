@@ -2,7 +2,6 @@
  * YomiMochi
  */
 
-const cache = new Map();
 let currentTranslator = 'deepl'; // Default
 
 // Load translator preference
@@ -16,22 +15,16 @@ chrome.storage.local.get(['translator'], (result) => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'translatorChanged') {
     currentTranslator = request.translator;
-    // Clear cache when translator changes
-    cache.clear();
   }
 });
 
-// Translate via background script
+// Translate via background script (background handles caching)
 async function translate(text) {
-  const cacheKey = `${currentTranslator}:${text}`;
-  if (cache.has(cacheKey)) return cache.get(cacheKey);
-  
   return new Promise((resolve, reject) => {
     chrome.runtime.sendMessage(
       { action: 'translate', text: text, translator: currentTranslator },
       (response) => {
         if (response && response.success) {
-          cache.set(cacheKey, response.translation);
           resolve(response.translation);
         } else {
           reject(new Error(response ? response.error : 'No response'));
