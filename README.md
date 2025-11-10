@@ -6,6 +6,8 @@ An extension for [YomiNinja](https://github.com/matt-m-o/YomiNinja) that automat
 
 ![Extension in action](demo.gif)
 
+<sub>Boundary Gate —Daughter of Kingdom—</sub>
+
 ## Installation
 
 1. Download the latest `yomimochi.zip` from [Releases](https://github.com/nell-otsuka/YomiMochi/releases)
